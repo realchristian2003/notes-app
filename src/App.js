@@ -1,27 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import { addDoc, getDocs, updateDoc, doc, notesCollectionRef } from './firebase';
 
 function App() {
-  const [notes, setNotes] = useState([
-    { id: 1, title: "My note 1", content: "Note content 1" },
-    { id: 2, title: "My note 2", content: "Note content 2" },
-    { id: 3, title: "My note 3", content: "Note content 3" },
-    { id: 4, title: "My note 4", content: "Note content 4" }
-  ]);
-
+  const [notes, setNotes] = useState([]); 
   const [editingId, setEditingId] = useState(null);
   const [editingField, setEditingField] = useState(null);
   const [tempValue, setTempValue] = useState("");
 
-  const addNote = () => {
-    const newId = notes.length + 1;
-    const newNote = {
-      id: newId,
-      title: `My note ${newId}`,
-      content: `Note content ${newId}`
+  useEffect(() => {
+    const fetchNotes = async () => {
+      const querySnapshot = await getDocs(notesCollectionRef);
+      const notesData = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setNotes(notesData);
     };
-    setNotes([...notes, newNote]);
+    fetchNotes();
+  }, []);
+
+
+  const addNote = async () => {
+    const newNote = {
+      title: `My note ${notes.length + 1}`,
+      content: `Note content ${notes.length + 1}`,
+    };
+
+    const docRef = await addDoc(notesCollectionRef, newNote);
+    setNotes([...notes, { ...newNote, id: docRef.id }]); 
   };
+
 
   const startEditing = (id, field, value) => {
     setEditingId(id);
@@ -29,13 +38,17 @@ function App() {
     setTempValue(value);
   };
 
-  const stopEditing = () => {
+
+  const stopEditing = async () => {
     if (editingId !== null && editingField) {
+      const noteDoc = doc(notesCollectionRef, editingId);
+      await updateDoc(noteDoc, { [editingField]: tempValue }); 
+
       setNotes((prevNotes) =>
         prevNotes.map((note) =>
           note.id === editingId ? { ...note, [editingField]: tempValue } : note
         )
-      );
+      ); 
     }
     setEditingId(null);
     setEditingField(null);
