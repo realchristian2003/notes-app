@@ -51,16 +51,48 @@
   margin: 0;
 }
 
+input,
+textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+.note-preview input,
+.note-preview textarea {
+  margin-top: 5px;
+}
+
+textarea {
+  resize: none;
+  height: 100px;
+}
 
 @media (max-width: 900px) {
   .App-main {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  textarea {
+    height: 80px;
   }
 }
 
 @media (min-width: 900px) {
   .App-main {
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  textarea {
+    height: 100px;
   }
 }
 
