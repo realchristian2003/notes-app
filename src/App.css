@@ -1,98 +1,67 @@
-.App {
-  text-align: center;
-  height: 100vh;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: white; 
   display: flex;
-  flex-direction: column;
+  justify-content: center; 
+  align-items: flex-start; 
+  height: 100vh; 
 }
 
-.App-main {
-  flex-grow: 1;
-  background-color: #e0e0e0fa;
-  padding: 20px;
-  display: grid;
-  gap: 10px; 
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-  justify-items: center;
-}
-
-.App-header {
+.auth-container {
+  width: 500px; 
+  padding: 25px;
+  border: 1px solid black; 
+  border-radius: 0; 
+  box-shadow: none; 
   background-color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  border-bottom: 1px solid gray;
+  text-align: left;
 }
-.header-text {
-  font-size: 24px;
+
+h2 {
+  font-size: 35px; 
   font-weight: bold;
+  margin-bottom: 40px;
+  text-align: left;
 }
 
-.note-preview {
-  background-color: yellow;
-  height: 200px;
-  width: 100%;
-  max-width: 200px;
-  margin: 10px;
-  padding: 10px;
+.input-container {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block; 
+  margin-bottom: 8px; 
+  font-size: 16px; 
+  color: #333; 
+}
+
+input {
+  width: 120%; 
+  padding: 10px; 
+  margin-bottom: 15px; 
+  border: 2px solid #ccc; 
   border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.note-preview h3 {
-  font-size: 18px;
-  margin: 0;
-}
-
-.note-preview p {
-  font-size: 14px;
-  margin: 0;
-}
-
-input,
-textarea {
-  width: 100%;
-  border: 1px solid #ccc;
-  padding: 5px;
   font-size: 16px;
-  border-radius: 3px;
-  box-sizing: border-box;
-}
-
-input:focus,
-textarea:focus {
+  background-color: transparent;
   outline: none;
 }
 
-.note-preview input,
-.note-preview textarea {
-  margin-top: 5px;
+input:focus {
+  border-color: #5b9bd5; 
 }
 
-textarea {
-  resize: none;
-  height: 100px;
+button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  background-color: lightgrey; 
+  border: none;
+  cursor: pointer;
 }
 
-@media (max-width: 900px) {
-  .App-main {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  textarea {
-    height: 80px;
-  }
+button:hover {
+  background-color: gray; 
 }
-
-@media (min-width: 900px) {
-  .App-main {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  textarea {
-    height: 100px;
-  }
-}
-
